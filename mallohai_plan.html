@@ -3,703 +3,821 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>말로해 — 서비스 기획서 v2</title>
+<title>말로해 — 플랫폼 소개서</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f8f9fb; color: #1a202c; line-height: 1.6; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;background:#0a0a0f;color:#e2e8f0;line-height:1.6}
 
-/* 히어로 */
-.hero {
-  background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  color: white; padding: 100px 40px; text-align: center; position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute; top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(ellipse at center, rgba(102,126,234,0.15) 0%, transparent 60%);
-}
-.hero-emoji { font-size: 80px; display: block; margin-bottom: 20px; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
-.hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -3px; margin-bottom: 12px; position: relative; }
-.hero h1 span { color: #a78bfa; }
-.hero .tagline { font-size: 22px; opacity: 0.85; margin-bottom: 16px; font-weight: 300; }
-.hero .desc { font-size: 15px; opacity: 0.65; max-width: 560px; margin: 0 auto 32px; line-height: 2; }
-.hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 40px; }
-.hero-stat { text-align: center; }
-.hero-stat .num { font-size: 36px; font-weight: 900; color: #a78bfa; }
-.hero-stat .label { font-size: 12px; opacity: 0.6; margin-top: 4px; }
+/* ── 공통 ── */
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.chip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:30px;margin-bottom:14px}
+.chip-purple{background:rgba(167,139,250,.18);color:#a78bfa;border:1px solid rgba(167,139,250,.3)}
+.chip-blue{background:rgba(96,165,250,.18);color:#60a5fa;border:1px solid rgba(96,165,250,.3)}
+.chip-green{background:rgba(52,211,153,.18);color:#34d399;border:1px solid rgba(52,211,153,.3)}
+.chip-orange{background:rgba(251,146,60,.18);color:#fb923c;border:1px solid rgba(251,146,60,.3)}
+.chip-pink{background:rgba(244,114,182,.18);color:#f472b6;border:1px solid rgba(244,114,182,.3)}
+.sec-title{font-size:38px;font-weight:900;letter-spacing:-1.5px;line-height:1.2;margin-bottom:14px}
+.sec-sub{font-size:16px;color:#94a3b8;line-height:1.9;max-width:680px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:0}
+section{padding:100px 0}
 
-/* 섹션 공통 */
-.section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-.section-label { font-size: 12px; font-weight: 700; color: #a78bfa; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-.section-title { font-size: 36px; font-weight: 900; margin-bottom: 10px; letter-spacing: -1px; }
-.section-desc { color: #718096; font-size: 16px; margin-bottom: 48px; line-height: 1.8; }
-.divider { height: 1px; background: linear-gradient(to right, transparent, #e2e8f0, transparent); }
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 28px;position:relative;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(99,74,221,.25) 0%,transparent 70%)}
+.hero-logo{font-size:96px;margin-bottom:24px;filter:drop-shadow(0 0 40px rgba(167,139,250,.5))}
+.hero h1{font-size:80px;font-weight:900;letter-spacing:-4px;line-height:1;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-tagline{font-size:22px;color:#94a3b8;margin-bottom:12px;font-weight:300}
+.hero-desc{font-size:15px;color:#64748b;line-height:2;max-width:520px;margin:0 auto 48px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:60px}
+.pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:30px;padding:8px 20px;font-size:13px;color:#cbd5e1}
+.hero-numbers{display:flex;gap:60px;justify-content:center}
+.hero-num{text-align:center}
+.hero-num .n{font-size:42px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-num .l{font-size:12px;color:#64748b;margin-top:4px}
 
-/* 문제 정의 */
-.problem-bg { background: #1a1a2e; }
-.problem-section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.problem-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; }
-.problem-card .p-icon { font-size: 56px; margin-bottom: 20px; }
-.problem-card h3 { font-size: 22px; font-weight: 800; color: white; margin-bottom: 16px; }
-.problem-card .p-desc { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 2; margin-bottom: 24px; }
-.problem-list { list-style: none; }
-.problem-list li { font-size: 13px; color: rgba(255,255,255,0.75); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: flex-start; gap: 10px; }
-.problem-list li::before { content: "😔"; font-size: 16px; flex-shrink: 0; }
-.p-stat { margin-top: 24px; padding: 16px; background: rgba(167,139,250,0.15); border-radius: 12px; border-left: 3px solid #a78bfa; }
-.p-stat .num { font-size: 28px; font-weight: 900; color: #a78bfa; }
-.p-stat .label { font-size: 11px; color: rgba(255,255,255,0.5); }
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);padding:14px 28px}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:32px}
+.nav-logo{font-size:20px;font-weight:900;color:#a78bfa;margin-right:auto}
+nav a{font-size:13px;color:#64748b;text-decoration:none;transition:color .2s}
+nav a:hover{color:#e2e8f0}
 
-/* 하루 시나리오 */
-.scenario { background: white; border-radius: 24px; padding: 48px; box-shadow: 0 8px 40px rgba(0,0,0,0.08); margin-bottom: 32px; }
-.scenario-header { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; }
-.scenario-avatar { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0; }
-.avatar-elder { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
-.avatar-blind { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
-.scenario-info h3 { font-size: 22px; font-weight: 800; }
-.scenario-info p { color: #718096; font-size: 14px; margin-top: 4px; }
-.timeline { position: relative; }
-.timeline::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #a78bfa, #667eea); }
-.timeline-item { display: flex; gap: 24px; margin-bottom: 28px; position: relative; }
-.timeline-time { width: 56px; text-align: right; font-size: 12px; font-weight: 700; color: #a78bfa; padding-top: 12px; flex-shrink: 0; }
-.timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #a78bfa; border: 3px solid white; box-shadow: 0 0 0 3px #a78bfa; flex-shrink: 0; margin-top: 12px; position: relative; z-index: 1; }
-.timeline-content { flex: 1; background: #f8f9fb; border-radius: 16px; padding: 20px; }
-.timeline-content .t-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-.chat-bubble { background: white; border-radius: 12px; padding: 12px 16px; margin: 6px 0; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.chat-bubble.user { background: #ede9fe; color: #4c1d95; margin-left: 20px; }
-.chat-bubble.ai { background: white; border-left: 3px solid #a78bfa; }
-.chat-bubble.action { background: #f0fdf4; border-left: 3px solid #22c55e; font-size: 12px; color: #166534; }
+/* ── 문제 ── */
+.problem-bg{background:linear-gradient(180deg,#0a0a0f 0%,#0d0d1a 100%)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px}
+.p-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:40px}
+.p-card .avatar{font-size:60px;margin-bottom:20px}
+.p-card h3{font-size:22px;font-weight:800;margin-bottom:12px}
+.p-card .p-lead{font-size:14px;color:#94a3b8;line-height:1.9;margin-bottom:24px}
+.pain-list{list-style:none}
+.pain-list li{font-size:13px;color:#94a3b8;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:12px;align-items:flex-start}
+.pain-list li::before{content:'😔';font-size:15px;flex-shrink:0;margin-top:1px}
+.p-stat{margin-top:28px;padding:18px 20px;background:rgba(167,139,250,.08);border-left:3px solid #a78bfa;border-radius:0 12px 12px 0}
+.p-stat .s-num{font-size:30px;font-weight:900;color:#a78bfa}
+.p-stat .s-txt{font-size:12px;color:#64748b;margin-top:4px}
+.insight-box{margin-top:48px;padding:36px 40px;background:linear-gradient(135deg,rgba(99,74,221,.12),rgba(96,165,250,.08));border:1px solid rgba(167,139,250,.2);border-radius:24px;text-align:center}
+.insight-box p{font-size:20px;line-height:1.8;color:#cbd5e1}
+.insight-box strong{color:#a78bfa}
 
-/* 기능 카드 */
-.feature-section { background: #f8f9fb; }
-.feature-tabs { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
-.feature-tab { padding: 10px 24px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; border: 2px solid #e2e8f0; background: white; color: #718096; }
-.feature-tab.active { background: #667eea; color: white; border-color: #667eea; }
-.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.feature-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.2s; }
-.feature-card:hover { transform: translateY(-4px); }
-.feature-card .f-icon { font-size: 40px; margin-bottom: 16px; }
-.feature-card .f-tag { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
-.tag-live { background: #dcfce7; color: #166534; }
-.tag-dev { background: #fef9c3; color: #854d0e; }
-.tag-plan { background: #ede9fe; color: #5b21b6; }
-.feature-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
-.feature-card .f-desc { font-size: 13px; color: #718096; line-height: 1.8; margin-bottom: 16px; }
-.feature-card .f-example { background: #f8f9fb; border-radius: 10px; padding: 12px; font-size: 12px; color: #4a5568; font-style: italic; }
-.feature-card .f-example::before { content: '💬 '; }
+/* ── 솔루션 ── */
+.solution-bg{background:#0d0d1a}
+.answer-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.ans-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px;text-align:center}
+.ans-card .a-icon{font-size:48px;margin-bottom:16px}
+.ans-card h4{font-size:17px;font-weight:800;margin-bottom:10px}
+.ans-card p{font-size:13px;color:#94a3b8;line-height:1.8}
 
-/* 시각장애인 특화 */
-.blind-section { background: linear-gradient(160deg, #0f172a, #1e1b4b); }
-.blind-inner { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-.blind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
-.blind-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(167,139,250,0.3); border-radius: 20px; padding: 32px; }
-.blind-card .b-icon { font-size: 40px; margin-bottom: 16px; }
-.blind-card h3 { font-size: 17px; font-weight: 800; color: white; margin-bottom: 10px; }
-.blind-card p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.8; }
-.blind-card .b-example { margin-top: 16px; background: rgba(167,139,250,0.1); border-radius: 10px; padding: 12px; font-size: 12px; color: #c4b5fd; }
+/* ── 시나리오 ── */
+.scenario-bg{background:#0a0a0f}
+.scenario-tabs{display:flex;gap:12px;margin-bottom:48px}
+.sc-tab{padding:12px 28px;border-radius:50px;font-size:14px;font-weight:700;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#64748b;cursor:pointer}
+.sc-tab.on{background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.4);color:#a78bfa}
+.scenario-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:48px;margin-bottom:32px}
+.sc-header{display:flex;align-items:center;gap:20px;margin-bottom:40px}
+.sc-avatar{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0}
+.av-elder{background:linear-gradient(135deg,#ffecd2,#fcb69f)}
+.av-blind{background:linear-gradient(135deg,#a1c4fd,#c2e9fb)}
+.sc-info h3{font-size:20px;font-weight:800;color:#e2e8f0}
+.sc-info p{font-size:13px;color:#64748b;margin-top:4px}
+.timeline{position:relative;padding-left:60px}
+.timeline::before{content:'';position:absolute;left:22px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,#a78bfa,#60a5fa,#34d399)}
+.tl-item{position:relative;margin-bottom:32px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-46px;top:12px;width:14px;height:14px;border-radius:50%;background:#a78bfa;border:3px solid #0a0a0f;box-shadow:0 0 0 3px rgba(167,139,250,.3)}
+.tl-time{font-size:11px;font-weight:700;color:#a78bfa;margin-bottom:8px;letter-spacing:1px}
+.tl-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 24px}
+.tl-box h4{font-size:14px;font-weight:700;margin-bottom:14px;color:#cbd5e1}
+.bubble{border-radius:14px;padding:11px 16px;margin:6px 0;font-size:13px;line-height:1.6}
+.bubble.user{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.2);color:#c4b5fd;margin-left:24px}
+.bubble.ai{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e2e8f0}
+.bubble.action{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:#6ee7b7;font-size:12px}
 
-/* 듀얼 결제 */
-.payment-section { background: white; }
-.payment-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0; align-items: center; margin-bottom: 48px; }
-.payment-step { text-align: center; padding: 24px; }
-.payment-step .p-icon { font-size: 48px; margin-bottom: 12px; }
-.payment-step h4 { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
-.payment-step p { font-size: 12px; color: #718096; }
-.payment-arrow { font-size: 24px; color: #c7d2fe; }
-.payment-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.ptype { border-radius: 20px; padding: 32px; color: white; }
-.ptype-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
-.ptype-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
-.ptype-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #0c4a6e; }
-.ptype h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
-.ptype .ptype-flow { margin-top: 20px; background: rgba(255,255,255,0.15); border-radius: 10px; padding: 14px; font-size: 12px; line-height: 2; }
-.ptype .ptype-limit { margin-top: 12px; font-size: 11px; opacity: 0.75; }
+/* ── 기능 ── */
+.feature-bg{background:#0d0d1a}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.feat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;transition:border-color .2s,transform .2s}
+.feat-card:hover{border-color:rgba(167,139,250,.3);transform:translateY(-4px)}
+.feat-card .f-icon{font-size:38px;margin-bottom:14px}
+.feat-card .f-status{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.fs-live{background:rgba(52,211,153,.15);color:#34d399}
+.fs-dev{background:rgba(251,191,36,.15);color:#fbbf24}
+.fs-plan{background:rgba(167,139,250,.15);color:#a78bfa}
+.feat-card h4{font-size:16px;font-weight:800;margin-bottom:8px;color:#e2e8f0}
+.feat-card p{font-size:13px;color:#64748b;line-height:1.8;margin-bottom:14px}
+.feat-card .f-ex{font-size:12px;color:#94a3b8;background:rgba(255,255,255,.04);border-radius:10px;padding:10px 14px;font-style:italic}
+.feat-card .f-ex::before{content:'"'}
+.feat-card .f-ex::after{content:'"'}
 
-/* 케어 리포트 */
-.care-section { background: #f8f9fb; }
-.care-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.care-phone { background: #1a1a2e; border-radius: 32px; padding: 24px; color: white; }
-.care-phone .phone-header { text-align: center; margin-bottom: 20px; }
-.care-phone .time { font-size: 11px; color: rgba(255,255,255,0.4); }
-.care-phone .app-name { font-size: 13px; font-weight: 700; color: #a78bfa; margin: 8px 0; }
-.kakao-msg { background: #fee500; border-radius: 16px; padding: 20px; color: #1a1a1a; }
-.kakao-msg .k-header { font-size: 13px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.kakao-msg .k-body { font-size: 12px; line-height: 2; }
-.kakao-msg .k-alert { background: rgba(255,0,0,0.1); border-radius: 8px; padding: 8px; margin-top: 10px; font-size: 11px; color: #dc2626; }
-.care-features { display: flex; flex-direction: column; gap: 16px; justify-content: center; }
-.care-feat { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); display: flex; gap: 16px; align-items: flex-start; }
-.care-feat .cf-icon { font-size: 32px; flex-shrink: 0; }
-.care-feat h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-.care-feat p { font-size: 13px; color: #718096; }
+/* ── 시각장애인 특화 ── */
+.blind-bg{background:linear-gradient(160deg,#060614 0%,#0e0e24 100%)}
+.blind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.blind-card{background:rgba(255,255,255,.04);border:1px solid rgba(96,165,250,.2);border-radius:20px;padding:28px}
+.blind-card .b-icon{font-size:38px;margin-bottom:14px}
+.blind-card h4{font-size:16px;font-weight:800;color:#e2e8f0;margin-bottom:8px}
+.blind-card p{font-size:13px;color:#64748b;line-height:1.8;margin-bottom:14px}
+.blind-card .b-ex{font-size:12px;color:#60a5fa;background:rgba(96,165,250,.08);border-radius:10px;padding:10px 14px}
 
-/* DB */
-.db-section { background: #0f172a; }
-.db-inner { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-.db-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.db-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; }
-.db-card h4 { font-size: 13px; font-weight: 700; color: #a78bfa; margin-bottom: 12px; font-family: monospace; }
-.db-field { font-size: 11px; padding: 4px 0; font-family: monospace; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.05); }
-.db-field .type { color: #67e8f9; }
+/* ── 듀얼 결제 ── */
+.payment-bg{background:#0a0a0f}
+.pay-flow{display:flex;align-items:center;justify-content:center;gap:0;margin:56px 0 48px}
+.pay-step{text-align:center;padding:24px 32px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;min-width:180px}
+.pay-step .ps-icon{font-size:40px;margin-bottom:10px}
+.pay-step h4{font-size:14px;font-weight:800;color:#e2e8f0;margin-bottom:6px}
+.pay-step p{font-size:12px;color:#64748b}
+.pay-arrow{font-size:28px;color:#334155;padding:0 12px}
+.pay-types{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ptype{border-radius:20px;padding:32px}
+.pt-1{background:linear-gradient(135deg,rgba(99,74,221,.3),rgba(99,74,221,.1));border:1px solid rgba(167,139,250,.3)}
+.pt-2{background:linear-gradient(135deg,rgba(239,68,68,.2),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.3)}
+.pt-3{background:linear-gradient(135deg,rgba(16,185,129,.2),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3)}
+.ptype h3{font-size:19px;font-weight:800;margin-bottom:10px}
+.ptype p{font-size:13px;color:#94a3b8;line-height:1.8;margin-bottom:16px}
+.ptype .pt-flow{font-size:12px;color:#cbd5e1;background:rgba(255,255,255,.06);border-radius:12px;padding:14px;line-height:2.2}
+.ptype .pt-note{font-size:11px;color:#64748b;margin-top:10px}
 
-/* 수익 모델 */
-.revenue-section { background: white; }
-.revenue-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-.rev-card { border-radius: 20px; padding: 36px; position: relative; overflow: hidden; }
-.rev-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 150px; height: 150px; border-radius: 50%; opacity: 0.08; }
-.rev-1 { background: #f5f3ff; border: 2px solid #ede9fe; }
-.rev-1::before { background: #7c3aed; }
-.rev-2 { background: #fff7ed; border: 2px solid #fed7aa; }
-.rev-2::before { background: #ea580c; }
-.rev-3 { background: #f0fdf4; border: 2px solid #bbf7d0; }
-.rev-3::before { background: #16a34a; }
-.rev-4 { background: #eff6ff; border: 2px solid #bfdbfe; }
-.rev-4::before { background: #2563eb; }
-.rev-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #374151; }
-.rev-card .price { font-size: 36px; font-weight: 900; margin-bottom: 10px; }
-.rev-1 .price { color: #7c3aed; }
-.rev-2 .price { color: #ea580c; }
-.rev-3 .price { color: #16a34a; }
-.rev-4 .price { color: #2563eb; }
-.rev-card p { font-size: 13px; color: #6b7280; line-height: 1.8; }
+/* ── 케어 리포트 ── */
+.care-bg{background:#0d0d1a}
+.care-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:56px;align-items:start}
+.kakao-wrap{background:#1a1a2e;border-radius:28px;padding:28px}
+.kphone-bar{text-align:center;margin-bottom:20px}
+.kphone-bar .ktime{font-size:12px;color:#475569}
+.kphone-bar .kapp{font-size:13px;font-weight:700;color:#a78bfa;margin-top:6px}
+.kakao{background:#fee500;border-radius:20px;padding:24px;color:#111}
+.kakao .khead{font-size:14px;font-weight:900;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.kakao .kbody{font-size:12px;line-height:2.4;white-space:pre-line}
+.kakao .kalert{margin-top:14px;padding:12px;background:rgba(239,68,68,.12);border-radius:10px;font-size:11px;color:#dc2626;line-height:1.6}
+.care-feats{display:flex;flex-direction:column;gap:16px}
+.cf{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;display:flex;gap:16px}
+.cf .ci{font-size:32px;flex-shrink:0}
+.cf h4{font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:4px}
+.cf p{font-size:13px;color:#64748b;line-height:1.7}
 
-/* 로드맵 */
-.roadmap-section { background: #f8f9fb; }
-.roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.phase { background: white; border-radius: 20px; padding: 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-.phase.current { border: 2px solid #667eea; background: linear-gradient(135deg, #f5f3ff, white); }
-.phase .ph-num { font-size: 64px; font-weight: 900; color: #f1f5f9; line-height: 1; margin-bottom: 8px; }
-.phase.current .ph-num { color: #c7d2fe; }
-.phase h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-.phase .ph-date { font-size: 12px; color: #9ca3af; margin-bottom: 20px; }
-.phase ul { list-style: none; }
-.phase ul li { font-size: 13px; color: #4b5563; padding: 7px 0; border-bottom: 1px solid #f9fafb; display: flex; align-items: center; gap: 8px; }
-.phase ul li .check { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
-.check-done { background: #dcfce7; color: #16a34a; }
-.check-dev { background: #fef9c3; color: #854d0e; }
-.check-plan { background: #f3f4f6; color: #9ca3af; }
+/* ── 수익 모델 ── */
+.rev-bg{background:#0a0a0f}
+.rev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
+.rev-card{border-radius:20px;padding:36px;position:relative;overflow:hidden}
+.rc-1{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2)}
+.rc-2{background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2)}
+.rc-3{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2)}
+.rc-4{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2)}
+.rev-card h3{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:10px}
+.rev-card .price{font-size:40px;font-weight:900;line-height:1;margin-bottom:14px}
+.rc-1 .price{color:#a78bfa}
+.rc-2 .price{color:#fb923c}
+.rc-3 .price{color:#34d399}
+.rc-4 .price{color:#60a5fa}
+.rev-card p{font-size:13px;color:#64748b;line-height:1.8}
+.rev-total{margin-top:40px;padding:36px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;text-align:center}
+.rev-total .rt-label{font-size:13px;color:#64748b;margin-bottom:8px}
+.rev-total .rt-num{font-size:48px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.rev-total .rt-note{font-size:12px;color:#475569;margin-top:8px}
 
-/* 현재 스택 */
-.stack-section { background: #1a1a2e; }
-.stack-inner { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
-.stack-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
-.stack-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; text-align: center; }
-.stack-card .s-icon { font-size: 36px; margin-bottom: 10px; }
-.stack-card h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 4px; }
-.stack-card p { font-size: 11px; color: rgba(255,255,255,0.4); }
-.stack-card .s-status { font-size: 10px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 8px; }
-.s-live { background: rgba(34,197,94,0.2); color: #4ade80; }
-.s-dev { background: rgba(234,179,8,0.2); color: #facc15; }
+/* ── 로드맵 ── */
+.road-bg{background:#0d0d1a}
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.phase{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:36px}
+.phase.now{border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.06)}
+.phase .ph-num{font-size:60px;font-weight:900;color:rgba(255,255,255,.06);line-height:1;margin-bottom:8px}
+.phase.now .ph-num{color:rgba(167,139,250,.2)}
+.phase h3{font-size:17px;font-weight:800;color:#e2e8f0;margin-bottom:4px}
+.phase .ph-date{font-size:12px;color:#64748b;margin-bottom:20px}
+.phase ul{list-style:none}
+.phase ul li{font-size:13px;color:#94a3b8;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:10px}
+.dot-done{width:8px;height:8px;border-radius:50%;background:#34d399;flex-shrink:0}
+.dot-dev{width:8px;height:8px;border-radius:50%;background:#fbbf24;flex-shrink:0}
+.dot-plan{width:8px;height:8px;border-radius:50%;background:#334155;flex-shrink:0}
 
-/* 푸터 */
-.footer { background: #0f172a; padding: 60px 24px; text-align: center; }
-.footer h2 { font-size: 48px; font-weight: 900; color: white; margin-bottom: 10px; }
-.footer p { color: rgba(255,255,255,0.4); font-size: 14px; }
+/* ── 스택 ── */
+.stack-bg{background:#0a0a0f}
+.stack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:56px}
+.st-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;text-align:center}
+.st-card .s-ico{font-size:34px;margin-bottom:10px}
+.st-card h4{font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:4px}
+.st-card p{font-size:11px;color:#475569}
+.st-card .s-dot{font-size:10px;padding:2px 10px;border-radius:20px;display:inline-block;margin-top:8px}
+.sd-live{background:rgba(52,211,153,.15);color:#34d399}
+.sd-dev{background:rgba(251,191,36,.15);color:#fbbf24}
+.sd-soon{background:rgba(167,139,250,.15);color:#a78bfa}
+
+/* ── 비전 ── */
+.vision-bg{background:linear-gradient(160deg,#060614,#0e0a1a)}
+.vision-inner{text-align:center;padding:120px 28px}
+.vision-inner .v-logo{font-size:80px;margin-bottom:28px}
+.vision-inner h2{font-size:48px;font-weight:900;letter-spacing:-2px;line-height:1.2;margin-bottom:20px}
+.vision-inner h2 em{font-style:normal;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.vision-inner p{font-size:17px;color:#64748b;line-height:2;max-width:600px;margin:0 auto 48px}
+.vision-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.vinfo{text-align:center}
+.vinfo .vi-label{font-size:11px;color:#475569;margin-bottom:4px}
+.vinfo .vi-val{font-size:14px;color:#94a3b8;font-family:monospace}
+
+/* ── FOOTER ── */
+footer{background:#060614;padding:48px 28px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+footer p{font-size:13px;color:#334155}
+footer strong{color:#64748b}
 
 @media(max-width:768px){
   .hero h1{font-size:48px}
-  .problem-grid,.feature-grid,.blind-grid,.payment-types,.care-grid,.db-grid,.revenue-grid,.roadmap,.stack-grid{grid-template-columns:1fr}
-  .payment-flow{grid-template-columns:1fr;gap:16px}
-  .payment-arrow{transform:rotate(90deg)}
-  .hero-stats{flex-direction:column;gap:24px}
+  .problem-grid,.answer-cards,.feature-grid,.blind-grid,.pay-types,.care-grid,.rev-grid,.roadmap,.stack-grid{grid-template-columns:1fr}
+  .pay-flow{flex-direction:column}
+  .pay-arrow{transform:rotate(90deg)}
+  .hero-numbers{flex-direction:column;gap:28px}
+  nav a{display:none}
+  .sec-title{font-size:28px}
 }
 </style>
 </head>
 <body>
 
-<!-- 히어로 -->
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">📞 말로해</span>
+    <a href="#problem">문제</a>
+    <a href="#solution">솔루션</a>
+    <a href="#features">기능</a>
+    <a href="#payment">결제</a>
+    <a href="#care">케어</a>
+    <a href="#revenue">수익</a>
+    <a href="#roadmap">로드맵</a>
+  </div>
+</nav>
+
+<!-- HERO -->
 <div class="hero">
-  <span class="hero-emoji">📞</span>
-  <h1>말로<span>해</span></h1>
-  <div class="tagline">전화 한 통으로 세상을 연결하는 AI 생활도우미</div>
-  <div class="desc">스마트폰을 못 쓰는 어르신, 화면을 볼 수 없는 시각장애인.<br>그들에게 필요한 건 앱이 아닙니다. <strong style="color:#a78bfa">전화 한 통</strong>이면 충분합니다.</div>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="num">1,050만</div><div class="label">타겟 사용자</div></div>
-    <div class="hero-stat"><div class="num">0개</div><div class="label">경쟁 서비스</div></div>
-    <div class="hero-stat"><div class="num">24시간</div><div class="label">365일 대기</div></div>
+  <div class="hero-logo">📞</div>
+  <h1>말로<em>해</em></h1>
+  <div class="hero-tagline">전화 한 통으로 세상을 연결하는 AI 생활도우미</div>
+  <div class="hero-desc">스마트폰을 못 쓰는 어르신, 화면을 볼 수 없는 시각장애인.<br>그들에게 필요한 건 복잡한 앱이 아닙니다.<br><strong style="color:#a78bfa">전화 한 통</strong>이면 충분합니다.</div>
+  <div class="hero-pills">
+    <span class="pill">🤖 GPT-4o AI</span>
+    <span class="pill">🇰🇷 한국어 음성</span>
+    <span class="pill">📱 카카오 알림톡</span>
+    <span class="pill">🛒 쿠팡 쇼핑 연동</span>
+    <span class="pill">👨‍👩‍👧 가족 케어 리포트</span>
+    <span class="pill">📸 사진 읽기</span>
+    <span class="pill">🚌 대중교통 안내</span>
+    <span class="pill">💳 듀얼 결제 시스템</span>
+  </div>
+  <div class="hero-numbers">
+    <div class="hero-num"><div class="n">1,050만</div><div class="l">대한민국 타겟 사용자</div></div>
+    <div class="hero-num"><div class="n">0개</div><div class="l">국내 동일 경쟁 서비스</div></div>
+    <div class="hero-num"><div class="n">24/365</div><div class="l">AI 무중단 대기</div></div>
   </div>
 </div>
 
-<!-- 문제 정의 -->
-<div class="problem-bg">
-  <div class="problem-section">
-    <div class="section-label" style="color:#a78bfa">PROBLEM</div>
-    <div class="section-title" style="color:white; font-size:36px; font-weight:900; margin-bottom:10px;">그들은 왜 소외됐을까요?</div>
-    <div class="section-desc" style="color:rgba(255,255,255,0.5); margin-bottom:48px;">기술이 발전할수록 더 외로워지는 사람들이 있습니다.</div>
-    <div class="problem-grid">
+<div class="divider"></div>
 
-      <div class="problem-card">
-        <div class="p-icon">👴👵</div>
+<!-- 문제 -->
+<section class="problem-bg" id="problem">
+  <div class="wrap">
+    <div class="chip chip-purple">Problem</div>
+    <div class="sec-title">기술이 발전할수록<br>더 외로워지는 사람들</div>
+    <div class="sec-sub">스마트폰, 앱, 키오스크. 디지털 세상은 빠르게 변하고 있지만, 1,050만 명은 아직도 그 바깥에 있습니다.</div>
+    <div class="problem-grid">
+      <div class="p-card">
+        <div class="avatar">👴👵</div>
         <h3>60대 이상 어르신</h3>
-        <div class="p-desc">스마트폰은 있지만 쓰기가 너무 어렵습니다. 작은 글씨, 복잡한 앱, 끊임없는 업데이트. 아이들한테 물어보기도 미안하고, 그냥 포기하게 됩니다.</div>
-        <ul class="problem-list">
-          <li>카카오톡 쓰다가 실수로 탈퇴한 경험</li>
-          <li>배달앱 쓰다가 몇 만원 더 결제한 경험</li>
-          <li>보이스피싱에 속아 돈 잃은 경험</li>
-          <li>혼자 살다 며칠째 연락 안 된 경험</li>
-          <li>병원 예약 못해서 아픈 채로 버틴 경험</li>
+        <div class="p-lead">스마트폰은 있지만 쓰기가 너무 어렵습니다. 작은 글씨, 복잡한 앱, 끊임없는 업데이트. 아이들한테 물어보기도 미안하고, 그냥 포기하게 됩니다. 혼자 사는 어르신일수록 더 위험합니다.</div>
+        <ul class="pain-list">
+          <li>카카오톡 쓰다가 실수로 탈퇴, 혼자 복구 불가</li>
+          <li>배달앱 쓰다가 잘못 주문해 몇 만원 날린 경험</li>
+          <li>보이스피싱에 속아 수백만 원 잃은 사례</li>
+          <li>병원 예약 못해서 아픈 채로 며칠 버틴 경험</li>
+          <li>며칠 동안 아무도 연락 안 된 고독사 위험</li>
+          <li>키오스크 앞에서 당황해 주문 포기</li>
         </ul>
         <div class="p-stat">
-          <div class="num">73%</div>
-          <div class="label">60대 이상 스마트폰 보유, 그러나 실제 활용률은 20% 미만</div>
+          <div class="s-num">73%</div>
+          <div class="s-txt">60대 이상 스마트폰 보유 — 그러나 실제 앱 활용률 20% 미만 (2026 디지털정보격차 실태조사)</div>
         </div>
       </div>
-
-      <div class="problem-card">
-        <div class="p-icon">👁️</div>
+      <div class="p-card">
+        <div class="avatar">👁️</div>
         <h3>시각장애인 · 저시력자</h3>
-        <div class="p-desc">스마트폰 화면낭독기(TTS)가 있지만, 앱마다 다른 UI에 매번 적응해야 합니다. 쇼핑, 배달, 택시 — 혼자 하기엔 너무 복잡합니다.</div>
-        <ul class="problem-list">
-          <li>앱 업데이트 후 UI 바뀌어 혼자 못 쓰는 경험</li>
+        <div class="p-lead">스마트폰 화면낭독기(TTS)가 있지만, 앱마다 다른 UI에 매번 적응해야 합니다. 업데이트 한 번이면 처음부터 다시 외워야 합니다. 쇼핑, 배달, 택시 — 혼자 하기엔 너무 복잡합니다.</div>
+        <ul class="pain-list">
+          <li>앱 업데이트 후 UI 바뀌어 혼자 쓰지 못함</li>
           <li>약봉투 글씨 못 읽어 잘못 복용한 경험</li>
           <li>버스 번호 못 보고 잘못 탄 경험</li>
-          <li>바코드 못 읽어 쇼핑 포기한 경험</li>
-          <li>길 잃었을 때 도움 요청 어려운 경험</li>
+          <li>바코드 못 읽어 쇼핑 포기</li>
+          <li>낯선 길에서 위치 파악 불가로 고립</li>
+          <li>배달·택시앱 UI 복잡해 혼자 주문 불가</li>
         </ul>
         <div class="p-stat">
-          <div class="num">25만명</div>
-          <div class="label">등록 시각장애인. 디지털 서비스 접근성 평균 점수 100점 중 42점</div>
+          <div class="s-num">25만명</div>
+          <div class="s-txt">등록 시각장애인. 디지털 서비스 접근성 평균 42점/100점 (한국장애인개발원)</div>
         </div>
       </div>
-
+    </div>
+    <div class="insight-box">
+      <p>이들에게 공통으로 쓸 수 있는 도구는 단 하나.<br><strong>전화기</strong>입니다. 버튼 하나면 연결됩니다.</p>
     </div>
   </div>
-</div>
+</section>
+
+<div class="divider"></div>
 
 <!-- 솔루션 -->
-<div class="section">
-  <div class="section-label">SOLUTION</div>
-  <div class="section-title">말로해의 답: 전화</div>
-  <div class="section-desc">모든 어르신이 쓸 수 있는 도구는 단 하나. <strong>전화기</strong>입니다.<br>AI가 24시간 기다립니다. 언제든 전화하면 됩니다.</div>
-
-  <!-- 어르신 시나리오 -->
-  <div class="scenario">
-    <div class="scenario-header">
-      <div class="scenario-avatar avatar-elder">👩</div>
-      <div class="scenario-info">
-        <h3>김순자님, 72세 · 서울 노원구 혼자 거주</h3>
-        <p>스마트폰은 있지만 카카오톡 외엔 거의 못 씀. 아들은 경기도에 살아 자주 못 옴.</p>
+<section class="solution-bg" id="solution">
+  <div class="wrap">
+    <div class="chip chip-blue">Solution</div>
+    <div class="sec-title">말로해의 답 — 전화</div>
+    <div class="sec-sub">AI가 24시간 기다립니다. 전화하면 됩니다. 앱 설치도, 로그인도, 터치도 필요 없습니다. 말만 하면 됩니다.</div>
+    <div class="answer-cards">
+      <div class="ans-card">
+        <div class="a-icon">📞</div>
+        <h4>전화 한 통</h4>
+        <p>스마트폰 여부 무관. 일반 전화기로도 가능. 번호 하나 외워두면 끝.</p>
+      </div>
+      <div class="ans-card">
+        <div class="a-icon">🗣️</div>
+        <h4>말로 하면 끝</h4>
+        <p>터치 없음. 메뉴 없음. 그냥 평소 말하듯 이야기하면 AI가 알아서 처리합니다.</p>
+      </div>
+      <div class="ans-card">
+        <div class="a-icon">👨‍👩‍👧</div>
+        <h4>가족이 안심</h4>
+        <p>매일 케어 리포트. 이상 징후 즉시 알림. 멀리 살아도 오늘 어머니 상태를 알 수 있습니다.</p>
       </div>
     </div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-time">오전<br>7:30</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">☀️ 하루 시작 — 날씨 & 운세</div>
-          <div class="chat-bubble user">"말로해, 오늘 날씨 어때? 나 외출해야 하는데"</div>
-          <div class="chat-bubble ai">"순자님, 오늘 서울 날씨는 맑음이고요, 기온은 9도입니다. 쌀쌀하니 코트 꼭 챙기세요! 오늘 운세도 알려드릴까요?"</div>
-          <div class="chat-bubble user">"응 알려줘"</div>
-          <div class="chat-bubble ai">"순자님 오늘 운세입니다. 오늘은 귀인을 만날 수 있는 날이에요. 외출하시면 좋은 일이 생길 거예요!"</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 하루 시나리오 -->
+<section class="scenario-bg" id="scenario">
+  <div class="wrap">
+    <div class="chip chip-purple">Real Story</div>
+    <div class="sec-title">실제 하루 이야기</div>
+    <div class="sec-sub">두 사람의 하루를 따라가 보세요. 말로해가 어떻게 달라지는지.</div>
+
+    <!-- 어르신 -->
+    <div class="scenario-card">
+      <div class="sc-header">
+        <div class="sc-avatar av-elder">👩</div>
+        <div class="sc-info">
+          <h3>김순자님, 72세 · 서울 노원구 혼자 거주</h3>
+          <p>스마트폰은 있지만 카카오톡 외엔 거의 못 씀. 아들은 경기도에 살아 자주 못 옴. 최근 무릎 수술로 외출이 불편.</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-time">오전<br>10:15</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">🛒 쇼핑 — 아들이 등록해 둔 리스트</div>
-          <div class="chat-bubble user">"나 쌀 떨어졌는데, 쌀 살 수 있어?"</div>
-          <div class="chat-bubble ai">"아드님이 등록해 두신 쌀 목록이 있어요. 20kg 한 포대에 49,900원이에요. 주문할까요?"</div>
-          <div class="chat-bubble user">"응, 주문해줘"</div>
-          <div class="chat-bubble ai">"아드님께 결제 요청 보낼게요. 승인하시면 바로 배송됩니다!"</div>
-          <div class="chat-bubble action">📱 → 아들 카카오톡: "어머니께서 쌀 20kg 주문 요청하셨습니다. ₩49,900 — [승인] [거절]"</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">오전 7:30</div>
+          <div class="tl-box">
+            <h4>☀️ 하루 시작 — 날씨 & 운세</h4>
+            <div class="bubble user">"말로해, 오늘 날씨 어때? 나 외출하려고"</div>
+            <div class="bubble ai">"순자님, 오늘 서울 날씨 맑음이고 기온은 9도예요. 쌀쌀하니까 코트 꼭 챙기세요! 오늘 운세도 알려드릴까요?"</div>
+            <div class="bubble user">"응, 알려줘"</div>
+            <div class="bubble ai">"오늘은 귀인을 만날 수 있는 좋은 날이에요. 외출하시면 좋은 일 생길 거예요!"</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">오전 10:15</div>
+          <div class="tl-box">
+            <h4>🛒 쇼핑 — 아들이 등록해 둔 쇼핑 리스트</h4>
+            <div class="bubble user">"쌀이 떨어졌는데 주문할 수 있어?"</div>
+            <div class="bubble ai">"아드님이 등록해 두신 쌀 목록 있어요. 20kg 한 포대에 49,900원이에요. 주문할까요?"</div>
+            <div class="bubble user">"응, 주문해줘"</div>
+            <div class="bubble ai">"아드님께 결제 요청 보낼게요. 승인하시면 바로 배송됩니다!"</div>
+            <div class="bubble action">📱 아들 카카오톡: "어머니께서 쌀 20kg 주문 요청하셨습니다. ₩49,900 ✅ 승인 / ❌ 거절"</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">오후 2:00</div>
+          <div class="tl-box">
+            <h4>📰 뉴스 & 말동무</h4>
+            <div class="bubble user">"심심한데 뉴스 알려줘"</div>
+            <div class="bubble ai">"오늘 첫 번째 뉴스예요. 오늘부터 65세 이상 독감 예방접종이 무료로 확대됐대요. 순자님도 맞으셨나요?"</div>
+            <div class="bubble user">"아직 못 맞았는데"</div>
+            <div class="bubble ai">"가까운 보건소에서 맞으실 수 있어요. 아드님께 함께 가자고 문자 보내드릴까요?"</div>
+            <div class="bubble action">📱 아들 SMS: "어머니께서 독감 예방접종을 아직 못 맞으셨어요. 보건소 함께 방문 부탁드려요 — 말로해"</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">저녁 8:00</div>
+          <div class="tl-box">
+            <h4>📊 케어 리포트 — 아들에게 자동 발송</h4>
+            <div class="bubble action">📱 아들 카카오톡 수신 | "오늘 어머니 활동 리포트: 통화 3회, 외출 1회, 쌀 주문 완료, 독감접종 미완료 ⚠️ | 상태: 정상 ✅"</div>
+          </div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-time">오후<br>2:00</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">📰 뉴스 & 말동무</div>
-          <div class="chat-bubble user">"심심한데 뉴스 좀 알려줘"</div>
-          <div class="chat-bubble ai">"오늘 주요 뉴스 세 가지 알려드릴게요. 첫째, 오늘부터 독감 예방접종이 65세 이상 무료로 확대됐대요. 순자님도 맞으셨나요?"</div>
-          <div class="chat-bubble user">"아직 못 맞았는데"</div>
-          <div class="chat-bubble ai">"가까운 보건소에서 맞으실 수 있어요. 아드님께 함께 가자고 문자 보내드릴까요?"</div>
+    </div>
+
+    <!-- 시각장애인 -->
+    <div class="scenario-card">
+      <div class="sc-header">
+        <div class="sc-avatar av-blind">🦯</div>
+        <div class="sc-info">
+          <h3>박민준님, 34세 · 선천성 시각장애 · 직장인</h3>
+          <p>스마트폰 TTS 사용하지만 앱 업데이트마다 헤맴. 혼자 외출 시 불편함 많음. 활동적인 성격, 최대한 독립적으로 생활하고 싶음.</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-time">저녁<br>8:00</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">📊 케어 리포트 — 아들에게 자동 발송</div>
-          <div class="chat-bubble action">📱 아들 카카오톡 수신: "오늘 어머니 활동 리포트 — 통화 3회, 외출 1회, 쌀 주문, 독감접종 미완료. 상태: 정상 ✅"</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">오전 8:00</div>
+          <div class="tl-box">
+            <h4>🚌 출근 — 실시간 버스 안내</h4>
+            <div class="bubble user">"143번 버스 지금 몇 분 후야?"</div>
+            <div class="bubble ai">"143번 버스 2분 30초 후 도착합니다. 준비하세요!"</div>
+            <div class="bubble ai">"버스 도착했어요. 앞문 쪽으로 이동하세요."</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">점심 12:30</div>
+          <div class="tl-box">
+            <h4>📸 약봉투 읽기 — 사진 → 텍스트</h4>
+            <div class="bubble user">"약봉투 사진 찍었는데 뭐라고 써 있어?"</div>
+            <div class="bubble ai">"타이레놀 500mg, 하루 3회, 식후 30분에 복용하세요. 오늘 오후 1시에 드셔야 해요. 알람 설정해드릴까요?"</div>
+            <div class="bubble user">"응, 설정해줘"</div>
+            <div class="bubble action">⏰ 오후 1:00 알람 설정 완료: "약 복용 시간입니다 — 타이레놀 500mg"</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">오후 6:30</div>
+          <div class="tl-box">
+            <h4>🏷️ 마트 — 바코드 스캔</h4>
+            <div class="bubble user">"이 상품 바코드 스캔했는데 뭔지 알려줘"</div>
+            <div class="bubble ai">"농심 신라면 멀티팩 5개입이에요. 가격 3,500원, 유통기한 2027년 3월입니다. 장바구니에 담을까요?"</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">오후 7:10</div>
+          <div class="tl-box">
+            <h4>📍 낯선 곳 — 주변 환경 설명</h4>
+            <div class="bubble user">"지금 어디 있는지 모르겠어. 주변에 뭐가 있어?"</div>
+            <div class="bubble ai">"GPS 확인했어요. 지금 강남역 10번 출구 앞이에요. 오른쪽 50m에 편의점, 앞쪽에 횡단보도 있어요. 목적지까지 안내해드릴까요?"</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- 시각장애인 시나리오 -->
-  <div class="scenario">
-    <div class="scenario-header">
-      <div class="scenario-avatar avatar-blind">🦯</div>
-      <div class="scenario-info">
-        <h3>박민준님, 34세 · 선천성 시각장애 · 직장인</h3>
-        <p>스마트폰 TTS 사용하지만, 앱이 복잡하고 업데이트마다 헤맴. 혼자 외출 시 불편함 많음.</p>
+<div class="divider"></div>
+
+<!-- 전체 기능 -->
+<section class="feature-bg" id="features">
+  <div class="wrap">
+    <div class="chip chip-green">Features</div>
+    <div class="sec-title">전체 기능</div>
+    <div class="sec-sub">전화로 말하면 AI가 모두 처리합니다. 현재 운영 중인 기능부터 개발 예정까지.</div>
+    <div class="feature-grid">
+      <div class="feat-card">
+        <div class="f-icon">☀️</div>
+        <span class="f-status fs-live">✅ 운영중</span>
+        <h4>날씨 안내</h4>
+        <p>실시간 날씨, 기온, 날씨 상태. 오늘 옷차림도 함께 추천합니다.</p>
+        <div class="f-ex">오늘 날씨 어때? 나 외출하려고</div>
       </div>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-time">오전<br>8:00</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">🚌 출근 — 대중교통 안내</div>
-          <div class="chat-bubble user">"지금 버스 몇 분 후에 와?"</div>
-          <div class="chat-bubble ai">"현재 위치 기준 143번 버스 3분 후, 1156번 8분 후 도착합니다. 143번 타시겠어요?"</div>
-          <div class="chat-bubble user">"응, 143번"</div>
-          <div class="chat-bubble ai">"143번이 2분 후 도착합니다. 준비해주세요!"</div>
-        </div>
+      <div class="feat-card">
+        <div class="f-icon">🔮</div>
+        <span class="f-status fs-live">✅ 운영중</span>
+        <h4>오늘의 운세</h4>
+        <p>이름·생년월일 기반 맞춤 운세. 건강·재물·인간관계를 따뜻하게 전달.</p>
+        <div class="f-ex">오늘 내 운세 알려줘</div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-time">점심<br>12:30</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">📸 약봉투 읽기</div>
-          <div class="chat-bubble user">"약봉투 사진 찍었는데 읽어줘"</div>
-          <div class="chat-bubble ai">"약봉투 확인했어요. 타이레놀 500mg, 하루 3회, 식후 30분에 복용. 오늘 오후 1시에 드셔야 해요. 알람 설정해드릴까요?"</div>
-        </div>
+      <div class="feat-card">
+        <div class="f-icon">📰</div>
+        <span class="f-status fs-live">✅ 운영중</span>
+        <h4>뉴스 요약</h4>
+        <p>Google 뉴스 RSS 실시간 연동. 주요 뉴스 3가지를 쉬운 말로 요약.</p>
+        <div class="f-ex">오늘 뉴스 뭐 있어?</div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-time">오후<br>6:30</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">🛒 마트 쇼핑 — 바코드 스캔</div>
-          <div class="chat-bubble user">"이 상품 바코드 스캔했는데 뭔지 알려줘"</div>
-          <div class="chat-bubble ai">"농심 신라면 멀티팩 5개입이에요. 가격은 3,500원이고, 유통기한은 2027년 3월입니다."</div>
-        </div>
+      <div class="feat-card">
+        <div class="f-icon">👨‍👩‍👧</div>
+        <span class="f-status fs-dev">🔨 개발중</span>
+        <h4>가족 연락</h4>
+        <p>이름 말하면 가족에게 SMS·카카오톡 발송. 응급 상황 즉시 연락.</p>
+        <div class="f-ex">아들한테 전화해줘</div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-time">오후<br>7:00</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="t-title">📍 길 안내 — 낯선 곳에서</div>
-          <div class="chat-bubble user">"지금 어디 있는지 모르겠어. 주변에 뭐가 있어?"</div>
-          <div class="chat-bubble ai">"GPS 확인했어요. 지금 강남역 10번 출구 앞이에요. 오른쪽으로 50m 가면 편의점이 있고, 앞에는 횡단보도가 있어요. 목적지까지 안내해드릴까요?"</div>
-        </div>
+      <div class="feat-card">
+        <div class="f-icon">🛒</div>
+        <span class="f-status fs-dev">🔨 개발중</span>
+        <h4>쇼핑 도우미</h4>
+        <p>자녀가 미리 등록한 쿠팡 쇼핑 리스트. 말 한마디로 주문·결제 요청.</p>
+        <div class="f-ex">쌀 떨어졌는데 주문해줘</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">📊</div>
+        <span class="f-status fs-dev">🔨 개발중</span>
+        <h4>케어 리포트</h4>
+        <p>매일 저녁 자녀 카카오톡으로 발송. 활동 요약·이상징후·복약 체크.</p>
+        <div class="f-ex">오늘 어머니 통화 3회, 쌀 주문 완료</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">📸</div>
+        <span class="f-status fs-plan">📋 예정</span>
+        <h4>사진 → 텍스트 읽기</h4>
+        <p>약봉투, 영수증, 우편물, 메뉴판. 사진 찍으면 AI가 내용을 읽어줌.</p>
+        <div class="f-ex">이 약봉투 뭐라고 써 있어?</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">🏷️</div>
+        <span class="f-status fs-plan">📋 예정</span>
+        <h4>바코드 → 상품 정보</h4>
+        <p>마트 바코드 스캔 → 상품명, 가격, 유통기한, 알레르기 정보.</p>
+        <div class="f-ex">이 상품 바코드 찍었는데 뭐야?</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">🚌</div>
+        <span class="f-status fs-plan">📋 예정</span>
+        <h4>실시간 대중교통</h4>
+        <p>현재 위치 기반 버스·지하철 도착 시간. 버스 번호 말하면 바로 안내.</p>
+        <div class="f-ex">143번 버스 지금 몇 분 후야?</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">📍</div>
+        <span class="f-status fs-plan">📋 예정</span>
+        <h4>주변 환경 안내</h4>
+        <p>낯선 곳에서 "여기 어디야?" → GPS 기반 주변 건물·거리·방향 설명.</p>
+        <div class="f-ex">지금 어디 있는지 모르겠어</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">💊</div>
+        <span class="f-status fs-plan">📋 예정</span>
+        <h4>약 복용 알림</h4>
+        <p>정해진 시간에 전화해서 약 복용 확인. 미복용 시 가족에게 알림.</p>
+        <div class="f-ex">오후 1시 혈압약 드셨나요?</div>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">🚕</div>
+        <span class="f-status fs-plan">📋 예정</span>
+        <h4>생활 서비스 연동</h4>
+        <p>카카오T 택시 호출, 배달의민족 주문, 병원 예약 대행.</p>
+        <div class="f-ex">택시 불러줘, 집으로 가야 해</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- 시각장애인 특화 기능 -->
-<div class="blind-section">
-  <div class="blind-inner">
-    <div class="section-label" style="color:#a78bfa">ACCESSIBILITY</div>
-    <div class="section-title" style="color:white; font-size:36px; font-weight:900; margin-bottom:10px;">시각장애인 특화 기능</div>
-    <div class="section-desc" style="color:rgba(255,255,255,0.5); margin-bottom:0;">국내 최초 시각장애인 전용 AI 전화 서비스. 앱 없이, 화면 없이.</div>
+<div class="divider"></div>
+
+<!-- 시각장애인 특화 -->
+<section class="blind-bg" id="blind">
+  <div class="wrap">
+    <div class="chip chip-blue">Accessibility</div>
+    <div class="sec-title">시각장애인 특화 기능</div>
+    <div class="sec-sub">국내 최초 시각장애인 전용 AI 전화 서비스. 앱 없이, 화면 없이, 말만 하면 됩니다. 국내 유사 서비스 현재 0개.</div>
     <div class="blind-grid">
       <div class="blind-card">
         <div class="b-icon">📸</div>
-        <h3>사진 → 텍스트 읽기</h3>
-        <p>약봉투, 영수증, 우편물, 메뉴판. 사진 찍으면 AI가 내용을 읽어드립니다.</p>
-        <div class="b-example">"약봉투 사진 찍었는데 읽어줘" → 복용법, 유통기한 안내</div>
+        <h4>사진 → 텍스트 읽기</h4>
+        <p>GPT-4o Vision 기반. 약봉투, 영수증, 우편물, 메뉴판, 간판 — 사진만 찍으면 AI가 읽어드립니다.</p>
+        <div class="b-ex">약봉투 사진 찍었는데 → 복용법, 유통기한, 주의사항 안내</div>
       </div>
       <div class="blind-card">
         <div class="b-icon">🏷️</div>
-        <h3>바코드 → 상품 정보</h3>
-        <p>마트에서 바코드 스캔하면 상품명, 가격, 유통기한, 알레르기 정보를 알려드립니다.</p>
-        <div class="b-example">"이거 바코드 찍었어" → "농심 신라면 5개입, 3,500원, 유통기한 2027.03"</div>
+        <h4>바코드 → 상품 정보</h4>
+        <p>마트·편의점 바코드 스캔. 상품명, 가격, 유통기한, 알레르기 정보를 즉시 안내합니다.</p>
+        <div class="b-ex">바코드 스캔 → "농심 신라면 5개입, 3,500원, 유통기한 2027.03"</div>
       </div>
       <div class="blind-card">
         <div class="b-icon">🚌</div>
-        <h3>실시간 대중교통</h3>
-        <p>현재 위치 기반 버스/지하철 도착 시간 안내. 버스 번호 말하면 몇 분 후인지 알려드립니다.</p>
-        <div class="b-example">"143번 버스 언제 와?" → "2분 30초 후 도착, 준비하세요!"</div>
+        <h4>실시간 대중교통</h4>
+        <p>서울 버스 API 연동. 버스 번호 말하면 현재 위치 기준 도착 시간을 초 단위로 안내합니다.</p>
+        <div class="b-ex">"143번 버스 언제 와?" → "2분 30초 후 도착, 준비하세요"</div>
       </div>
       <div class="blind-card">
         <div class="b-icon">📍</div>
-        <h3>주변 환경 설명</h3>
-        <p>낯선 곳에서 "여기 어디야?"라고 물으면 주변 건물, 거리, 방향을 설명해드립니다.</p>
-        <div class="b-example">"지금 어디야?" → "강남역 10번 출구, 오른쪽 50m 편의점"</div>
+        <h4>주변 환경 설명</h4>
+        <p>GPS 기반 현재 위치 파악. 주변 건물, 거리, 방향, 가게를 자연어로 설명합니다.</p>
+        <div class="b-ex">"지금 어디야?" → "강남역 10번 출구, 오른쪽 50m 편의점"</div>
       </div>
       <div class="blind-card">
         <div class="b-icon">🏥</div>
-        <h3>병원/약국 찾기</h3>
-        <p>현재 위치에서 가장 가까운 병원, 안과, 약국을 찾아드립니다. 운영 시간도 확인.</p>
-        <div class="b-example">"가까운 안과 어디야?" → "도보 5분 거리 강남안과 현재 진료중"</div>
+        <h4>병원 · 약국 찾기</h4>
+        <p>현재 위치 기반 가장 가까운 병원·안과·약국 검색. 운영 시간, 전화번호, 도보 거리 안내.</p>
+        <div class="b-ex">"가까운 안과 어디야?" → "도보 5분 강남안과, 현재 진료중"</div>
       </div>
       <div class="blind-card">
         <div class="b-icon">🎵</div>
-        <h3>음악 · 라디오</h3>
-        <p>장르나 아티스트 이름을 말하면 음악을 틀어드립니다. 라디오 채널 연결도 가능합니다.</p>
-        <div class="b-example">"트로트 틀어줘" → 현재 인기 트로트 재생</div>
+        <h4>음악 · 라디오</h4>
+        <p>장르나 아티스트 이름을 말하면 음악 연결. KBS·MBC 라디오 채널 직접 연결도 가능합니다.</p>
+        <div class="b-ex">"트로트 틀어줘" → 현재 인기 트로트 재생</div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<div class="divider"></div>
 
 <!-- 듀얼 결제 -->
-<div class="payment-section">
-  <div class="section">
-    <div class="section-label">SHOPPING & PAYMENT</div>
-    <div class="section-title">듀얼 결제 시스템</div>
-    <div class="section-desc">어르신의 자율성을 지키면서도 가족이 안심할 수 있는 구조.</div>
-
-    <div class="payment-flow">
-      <div class="payment-step">
-        <div class="p-icon">👨‍👩‍👧</div>
+<section class="payment-bg" id="payment">
+  <div class="wrap">
+    <div class="chip chip-orange">Shopping & Payment</div>
+    <div class="sec-title">듀얼 결제 시스템</div>
+    <div class="sec-sub">어르신의 자율성을 지키면서도 가족이 안심할 수 있는 구조. 세 가지 방식 중 상황에 맞게 선택합니다.</div>
+    <div class="pay-flow">
+      <div class="pay-step">
+        <div class="ps-icon">👨‍👩‍👧</div>
         <h4>자녀가 리스트 등록</h4>
         <p>자주 사는 물건 미리 등록<br>쿠팡 링크 + 가격 + 한도</p>
       </div>
-      <div class="payment-arrow">→</div>
-      <div class="payment-step">
-        <div class="p-icon">📞</div>
+      <div class="pay-arrow">→</div>
+      <div class="pay-step">
+        <div class="ps-icon">📞</div>
         <h4>어르신이 전화로 주문</h4>
-        <p>"쌀 사줘"<br>"약 주문해줘"</p>
+        <p>"쌀 사줘"<br>"이번 달 약 주문해줘"</p>
       </div>
-      <div class="payment-arrow">→</div>
-      <div class="payment-step">
-        <div class="p-icon">💳</div>
+      <div class="pay-arrow">→</div>
+      <div class="pay-step">
+        <div class="ps-icon">💳</div>
         <h4>결제 방식 선택</h4>
-        <p>자가결제 / 요청결제<br>보호자 결제</p>
+        <p>상황에 따라<br>3가지 방식 중 하나</p>
+      </div>
+      <div class="pay-arrow">→</div>
+      <div class="pay-step">
+        <div class="ps-icon">📱</div>
+        <h4>완료 & 알림</h4>
+        <p>주문 완료 알림<br>케어 리포트에 자동 기록</p>
       </div>
     </div>
-
-    <div class="payment-types">
-      <div class="ptype ptype-1">
+    <div class="pay-types">
+      <div class="ptype pt-1">
         <h3>🙋 자가 결제</h3>
-        <p>어르신이 직접 결제합니다. 1회 결제 한도를 사전에 설정할 수 있어요. 카카오페이·네이버페이 연동.</p>
-        <div class="ptype-flow">
+        <p>어르신이 직접 결제합니다. 카카오페이·네이버페이 간편결제 연동. 1회 결제 한도를 사전에 설정할 수 있어요.</p>
+        <div class="pt-flow">
           📞 "쌀 사줘"<br>
           🤖 "49,900원 결제할까요?"<br>
           👩 "응"<br>
-          💳 → 간편결제 완료
+          💳 간편결제 완료
         </div>
-        <div class="ptype-limit">※ 1회 한도 설정 가능 (기본 5만원)</div>
+        <div class="pt-note">※ 1회 한도 설정 가능 (기본 5만원)</div>
       </div>
-      <div class="ptype ptype-2">
+      <div class="ptype pt-2">
         <h3>📤 결제 요청</h3>
-        <p>어르신이 요청하면 자녀 카카오톡으로 알림. 자녀가 승인하면 결제. 금액 확인 후 안심 결제.</p>
-        <div class="ptype-flow">
-          📞 "쌀 사줘"<br>
-          📱 아들 카톡: "어머니 쌀 주문 요청"<br>
-          ✅ 아들 승인<br>
-          💳 → 자동 결제 완료
+        <p>어르신이 요청하면 자녀 카카오톡으로 알림 발송. 자녀가 금액 확인 후 승인하면 결제 완료. 가장 안전한 방식.</p>
+        <div class="pt-flow">
+          📞 주문 요청<br>
+          📱 자녀 카톡 알림<br>
+          ✅ 자녀 승인<br>
+          💳 자동 결제 완료
         </div>
-        <div class="ptype-limit">※ 승인 없으면 결제 불가</div>
+        <div class="pt-note">※ 승인 없으면 결제 불가, 완전 안심</div>
       </div>
-      <div class="ptype ptype-3">
+      <div class="ptype pt-3">
         <h3>👨‍👩‍👧 보호자 결제</h3>
-        <p>자녀가 미리 등록한 카드로 자동 결제. 월 한도 설정 가능. 월말 사용 내역 자동 리포트.</p>
-        <div class="ptype-flow">
+        <p>자녀가 미리 등록한 카드로 자동 결제. 월 한도 설정으로 과소비 방지. 월말 사용 내역 자동 리포트 발송.</p>
+        <div class="pt-flow">
           📋 자녀가 리스트 등록<br>
-          📞 "쌀 사줘"<br>
-          💳 → 자녀 카드 자동 결제<br>
-          📱 완료 알림 발송
+          📞 어르신 주문<br>
+          💳 자녀 카드 자동 결제<br>
+          📱 완료 알림
         </div>
-        <div class="ptype-limit">※ 월 한도 설정 (기본 30만원)</div>
+        <div class="pt-note">※ 월 한도 설정 (기본 30만원)</div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<div class="divider"></div>
 
 <!-- 케어 리포트 -->
-<div class="care-section">
-  <div class="section">
-    <div class="section-label">CARE REPORT</div>
-    <div class="section-title">일일 케어 리포트</div>
-    <div class="section-desc">매일 저녁 자녀에게 카카오톡으로 발송됩니다. 멀리 살아도 안심.</div>
+<section class="care-bg" id="care">
+  <div class="wrap">
+    <div class="chip chip-green">Care Report</div>
+    <div class="sec-title">일일 케어 리포트</div>
+    <div class="sec-sub">매일 저녁 자녀에게 카카오톡으로 발송됩니다. 멀리 살아도 오늘 어머니 상태를 알 수 있습니다.</div>
     <div class="care-grid">
-      <div>
-        <div class="care-phone">
-          <div class="phone-header">
-            <div class="time">오후 8:00</div>
-            <div class="app-name">📱 말로해 케어</div>
-          </div>
-          <div class="kakao-msg">
-            <div class="k-header">📊 어머니 오늘 하루 리포트</div>
-            <div class="k-body">
-              👩 김순자님 (72세, 노원구)<br>
-              ━━━━━━━━━━━━<br>
-              📞 통화 횟수: <strong>3회 (총 12분)</strong><br>
-              ☀️ 날씨 문의: 오전 7:30<br>
-              🛒 쌀 주문: 완료 (49,900원)<br>
-              📰 뉴스: 오후 2:00<br>
-              ━━━━━━━━━━━━<br>
-              💚 상태: <strong>정상 (평소 패턴)</strong><br>
-              📍 외출: 오전 10시 약 1시간
-            </div>
-            <div class="k-alert">⚠️ 독감 예방접종 미완료. 가까운 보건소 동행을 권장합니다.</div>
-          </div>
+      <div class="kakao-wrap">
+        <div class="kphone-bar">
+          <div class="ktime">오후 8:00</div>
+          <div class="kapp">📱 말로해 케어</div>
+        </div>
+        <div class="kakao">
+          <div class="khead">📊 어머니 오늘 하루 리포트</div>
+          <div class="kbody">👩 김순자님 (72세, 노원구)
+━━━━━━━━━━━━━━━━
+📞 오늘 통화: 3회 (총 12분)
+☀️ 날씨 문의: 오전 7:30
+🛒 쌀 주문: ₩49,900 완료
+📰 뉴스 청취: 오후 2:00
+📍 외출: 오전 10시 약 1시간
+━━━━━━━━━━━━━━━━
+💚 상태: 정상 (평소 패턴)</div>
+          <div class="kalert">⚠️ 독감 예방접종 미완료. 가까운 보건소 동행을 권장합니다.</div>
         </div>
       </div>
-      <div class="care-features">
-        <div class="care-feat">
-          <div class="cf-icon">🚨</div>
+      <div class="care-feats">
+        <div class="cf">
+          <div class="ci">🚨</div>
           <div>
             <h4>이상 징후 감지</h4>
-            <p>평소보다 통화가 없으면 자녀에게 즉시 알림. 고독사 예방 시스템.</p>
+            <p>평소보다 통화가 없으면 자녀에게 즉시 알림. 고독사 예방 시스템. "오늘 어머니 연락이 없어요."</p>
           </div>
         </div>
-        <div class="care-feat">
-          <div class="cf-icon">📊</div>
+        <div class="cf">
+          <div class="ci">📊</div>
           <div>
             <h4>활동 패턴 분석</h4>
-            <p>통화 시간, 빈도, 요청 내용으로 어르신 생활 패턴 추적. 변화 감지.</p>
+            <p>통화 시간, 빈도, 요청 내용으로 어르신 생활 패턴 추적. 주간·월간 변화 감지.</p>
           </div>
         </div>
-        <div class="care-feat">
-          <div class="cf-icon">💊</div>
+        <div class="cf">
+          <div class="ci">💊</div>
           <div>
             <h4>약 복용 체크</h4>
-            <p>"약 드셨어요?" 매일 정해진 시간에 체크. 미복용 시 자녀 알림.</p>
+            <p>매일 정해진 시간에 "약 드셨어요?" 전화. 미복용 시 가족에게 즉시 알림.</p>
           </div>
         </div>
-        <div class="care-feat">
-          <div class="cf-icon">📅</div>
+        <div class="cf">
+          <div class="ci">📅</div>
           <div>
-            <h4>일정 관리</h4>
-            <p>병원 예약, 가족 모임, 복지관 프로그램 일정 알림. 까먹지 않게.</p>
+            <h4>일정 알림</h4>
+            <p>병원 예약, 가족 모임, 복지관 프로그램 일정 알림. 하루 전·당일 알림 발송.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- DB 스키마 -->
-<div class="db-section">
-  <div class="db-inner">
-    <div class="section-label" style="color:#a78bfa">DATABASE</div>
-    <div class="section-title" style="color:white; font-size:36px; font-weight:900; margin-bottom:10px;">데이터베이스 구조</div>
-    <div class="section-desc" style="color:rgba(255,255,255,0.5); margin-bottom:48px;">Supabase PostgreSQL — Seoul 서버 (현재 운영중)</div>
-    <div class="db-grid">
-      <div class="db-card">
-        <h4>👤 users</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">phone <span class="type">VARCHAR UNIQUE</span></div>
-        <div class="db-field">name <span class="type">VARCHAR</span></div>
-        <div class="db-field">birth_date <span class="type">DATE</span></div>
-        <div class="db-field">address <span class="type">TEXT</span></div>
-        <div class="db-field">created_at <span class="type">TIMESTAMPTZ</span></div>
-      </div>
-      <div class="db-card">
-        <h4>👨‍👩‍👧 caregivers</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">name <span class="type">VARCHAR</span></div>
-        <div class="db-field">phone <span class="type">VARCHAR</span></div>
-        <div class="db-field">can_approve_payment <span class="type">BOOL</span></div>
-        <div class="db-field">payment_limit <span class="type">INTEGER</span></div>
-      </div>
-      <div class="db-card">
-        <h4>📞 call_logs</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">call_id <span class="type">VARCHAR</span></div>
-        <div class="db-field">duration_seconds <span class="type">INTEGER</span></div>
-        <div class="db-field">functions_called <span class="type">TEXT[]</span></div>
-        <div class="db-field">created_at <span class="type">TIMESTAMPTZ</span></div>
-      </div>
-      <div class="db-card">
-        <h4>🛒 shopping_lists</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">added_by <span class="type">VARCHAR</span></div>
-        <div class="db-field">item_name <span class="type">VARCHAR</span></div>
-        <div class="db-field">item_price <span class="type">INTEGER</span></div>
-        <div class="db-field">status <span class="type">VARCHAR</span></div>
-      </div>
-      <div class="db-card">
-        <h4>💳 payment_requests</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">amount <span class="type">INTEGER</span></div>
-        <div class="db-field">payment_type <span class="type">VARCHAR</span></div>
-        <div class="db-field">status <span class="type">VARCHAR</span></div>
-        <div class="db-field">approved_by <span class="type">VARCHAR</span></div>
-      </div>
-      <div class="db-card">
-        <h4>📊 daily_reports</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">report_date <span class="type">DATE</span></div>
-        <div class="db-field">call_count <span class="type">INTEGER</span></div>
-        <div class="db-field">functions_used <span class="type">JSONB</span></div>
-        <div class="db-field">anomaly_detected <span class="type">BOOLEAN</span></div>
-      </div>
-      <div class="db-card">
-        <h4>👨‍👩‍👧 family_contacts</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">name <span class="type">VARCHAR</span></div>
-        <div class="db-field">phone <span class="type">VARCHAR</span></div>
-        <div class="db-field">relation <span class="type">VARCHAR</span></div>
-        <div class="db-field">created_at <span class="type">TIMESTAMPTZ</span></div>
-      </div>
-      <div class="db-card">
-        <h4>🔔 notifications</h4>
-        <div class="db-field">id <span class="type">UUID PK</span></div>
-        <div class="db-field">user_id <span class="type">FK → users</span></div>
-        <div class="db-field">type <span class="type">VARCHAR</span></div>
-        <div class="db-field">message <span class="type">TEXT</span></div>
-        <div class="db-field">sent_to <span class="type">VARCHAR</span></div>
-        <div class="db-field">sent_at <span class="type">TIMESTAMPTZ</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="divider"></div>
 
 <!-- 수익 모델 -->
-<div class="revenue-section">
-  <div class="section">
-    <div class="section-label">BUSINESS MODEL</div>
-    <div class="section-title">수익 모델</div>
-    <div class="section-desc">다층 구조로 안정적인 수익과 사회적 가치를 동시에.</div>
-    <div class="revenue-grid">
-      <div class="rev-card rev-1">
+<section class="rev-bg" id="revenue">
+  <div class="wrap">
+    <div class="chip chip-orange">Business Model</div>
+    <div class="sec-title">수익 모델</div>
+    <div class="sec-sub">다층 구조로 안정적인 수익과 사회적 가치를 동시에 창출합니다.</div>
+    <div class="rev-grid">
+      <div class="rev-card rc-1">
         <h3>👤 개인 구독 — 어르신 본인</h3>
         <div class="price">월 5,900원</div>
-        <p>날씨·운세·뉴스·뉴스 무제한. 가족 연락 월 30회. 케어 리포트 기본. 복지카드 소지자 50% 할인 추진.</p>
+        <p>날씨·운세·뉴스·뉴스 무제한. 가족 연락 월 30회. 케어 리포트 기본 제공. 복지카드 소지자 50% 할인 추진.</p>
       </div>
-      <div class="rev-card rev-2">
+      <div class="rev-card rc-2">
         <h3>👨‍👩‍👧 효도 구독 — 자녀가 선물</h3>
         <div class="price">월 9,900원</div>
-        <p>케어 리포트 포함. 쇼핑 리스트 등록. 결제 승인 시스템. 이상징후 즉시 알림. 약 복용 체크.</p>
+        <p>케어 리포트 포함. 쇼핑 리스트 등록. 결제 승인 시스템. 이상징후 즉시 알림. 약 복용 체크. 자녀를 위한 가장 실용적인 효도.</p>
       </div>
-      <div class="rev-card rev-3">
-        <h3>🏥 B2B — 요양원·복지관</h3>
+      <div class="rev-card rc-3">
+        <h3>🏥 B2B — 요양원 · 복지관</h3>
         <div class="price">월 50만원~</div>
         <p>입소자 전원 케어. 관리자 대시보드. 맞춤형 리포트. 사회적 기업 협약. 정부 복지 연계 보조금 활용 가능.</p>
       </div>
-      <div class="rev-card rev-4">
-        <h3>🛒 커머스 · 생활 서비스</h3>
+      <div class="rev-card rc-4">
+        <h3>🛒 커머스 · 생활 서비스 수수료</h3>
         <div class="price">3~8%</div>
-        <p>쿠팡 쇼핑 중개 수수료. 카카오T 택시 호출 수수료. 배달 중개. 약국·병원 연계 수수료.</p>
+        <p>쿠팡 쇼핑 중개 수수료. 카카오T 택시 호출 수수료. 배달 중개. 약국·병원 연계 수수료. 매출 연동 수익.</p>
       </div>
     </div>
+    <div class="rev-total">
+      <div class="rt-label">효도 구독 1만 명 기준 월 예상 수익</div>
+      <div class="rt-num">약 1억원/월</div>
+      <div class="rt-note">구독 ₩99M + 커머스 수수료 별도 | B2B 계약 추가 시 복리 성장</div>
+    </div>
   </div>
-</div>
+</section>
+
+<div class="divider"></div>
 
 <!-- 로드맵 -->
-<div class="roadmap-section">
-  <div class="section">
-    <div class="section-label">ROADMAP</div>
-    <div class="section-title">개발 로드맵</div>
-    <div class="section-desc">단계별로 빠르게 출시합니다.</div>
+<section class="road-bg" id="roadmap">
+  <div class="wrap">
+    <div class="chip chip-purple">Roadmap</div>
+    <div class="sec-title">개발 로드맵</div>
+    <div class="sec-sub">단계별로 빠르게 출시합니다. 현재 Phase 1 진행 중.</div>
     <div class="roadmap">
-      <div class="phase current">
+      <div class="phase now">
         <div class="ph-num">1</div>
         <h3>Phase 1 — MVP</h3>
-        <div class="ph-date">2026년 11월 (진행중)</div>
+        <div class="ph-date">2026년 11월 · 현재 진행중</div>
         <ul>
-          <li><span class="check check-done">✓</span>AI 전화 (Vapi.ai)</li>
-          <li><span class="check check-done">✓</span>날씨·운세·뉴스</li>
-          <li><span class="check check-done">✓</span>회원 가입·조회 (Supabase)</li>
-          <li><span class="check check-done">✓</span>케어 리포트 DB 구조</li>
-          <li><span class="check check-dev">◐</span>가족 SMS 발송 (Twilio)</li>
-          <li><span class="check check-dev">◐</span>카카오 알림톡 연동</li>
+          <li><span class="dot-done"></span>AI 전화 (Vapi.ai + GPT-4o)</li>
+          <li><span class="dot-done"></span>한국어 음성 (Azure TTS)</li>
+          <li><span class="dot-done"></span>날씨 · 운세 · 뉴스</li>
+          <li><span class="dot-done"></span>회원 가입·조회 (Supabase)</li>
+          <li><span class="dot-done"></span>케어 리포트 DB 구조</li>
+          <li><span class="dot-dev"></span>가족 SMS 발송 (Twilio)</li>
+          <li><span class="dot-dev"></span>카카오 알림톡 연동</li>
+          <li><span class="dot-dev"></span>쇼핑 리스트 DB 연동</li>
         </ul>
       </div>
       <div class="phase">
         <div class="ph-num">2</div>
-        <h3>Phase 2 — 쇼핑·케어</h3>
+        <h3>Phase 2 — 쇼핑 · 케어</h3>
         <div class="ph-date">2026년 12월</div>
         <ul>
-          <li><span class="check check-plan">○</span>쿠팡 쇼핑 연동</li>
-          <li><span class="check check-plan">○</span>듀얼 결제 시스템</li>
-          <li><span class="check check-plan">○</span>일일 케어 리포트 자동 발송</li>
-          <li><span class="check check-plan">○</span>이상 징후 감지 알림</li>
-          <li><span class="check check-plan">○</span>보호자 웹 대시보드</li>
-          <li><span class="check check-plan">○</span>약 복용 체크</li>
+          <li><span class="dot-plan"></span>쿠팡 쇼핑 API 연동</li>
+          <li><span class="dot-plan"></span>듀얼 결제 시스템</li>
+          <li><span class="dot-plan"></span>일일 케어 리포트 자동 발송</li>
+          <li><span class="dot-plan"></span>이상 징후 감지 알림</li>
+          <li><span class="dot-plan"></span>보호자 웹 대시보드</li>
+          <li><span class="dot-plan"></span>약 복용 체크 시스템</li>
+          <li><span class="dot-plan"></span>간편결제 연동</li>
+          <li><span class="dot-plan"></span>베타 테스트 (100명)</li>
         </ul>
       </div>
       <div class="phase">
@@ -707,68 +825,84 @@ body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; backgroun
         <h3>Phase 3 — 플랫폼</h3>
         <div class="ph-date">2027년 1분기</div>
         <ul>
-          <li><span class="check check-plan">○</span>사진 → 텍스트 읽기</li>
-          <li><span class="check check-plan">○</span>바코드 스캔</li>
-          <li><span class="check check-plan">○</span>실시간 대중교통</li>
-          <li><span class="check check-plan">○</span>카카오T 택시 연동</li>
-          <li><span class="check check-plan">○</span>B2B 요양원 계약</li>
-          <li><span class="check check-plan">○</span>한국 070/1588 번호</li>
+          <li><span class="dot-plan"></span>사진 → 텍스트 읽기</li>
+          <li><span class="dot-plan"></span>바코드 스캔</li>
+          <li><span class="dot-plan"></span>실시간 대중교통 안내</li>
+          <li><span class="dot-plan"></span>주변 환경 GPS 안내</li>
+          <li><span class="dot-plan"></span>카카오T 택시 연동</li>
+          <li><span class="dot-plan"></span>B2B 요양원 계약</li>
+          <li><span class="dot-plan"></span>한국 1588 / 070 번호</li>
+          <li><span class="dot-plan"></span>Android/iOS 보호자 앱</li>
         </ul>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- 현재 기술 스택 -->
-<div class="stack-section">
-  <div class="stack-inner">
-    <div class="section-label" style="color:#a78bfa">TECH STACK</div>
-    <div class="section-title" style="color:white; font-size:36px; font-weight:900; margin-bottom:48px;">현재 운영 인프라</div>
+<div class="divider"></div>
+
+<!-- 기술 스택 -->
+<section class="stack-bg" id="stack">
+  <div class="wrap">
+    <div class="chip chip-blue">Tech Stack</div>
+    <div class="sec-title">현재 운영 인프라</div>
+    <div class="sec-sub">이미 운영 중인 실제 서비스입니다. 테스트 번호: +1 (551) 212-4160</div>
     <div class="stack-grid">
-      <div class="stack-card">
-        <div class="s-icon">🤖</div>
+      <div class="st-card">
+        <div class="s-ico">🤖</div>
         <h4>Vapi.ai</h4>
         <p>AI 전화 플랫폼<br>GPT-4o 기반</p>
-        <span class="s-status s-live">LIVE</span>
+        <span class="s-dot sd-live">LIVE</span>
       </div>
-      <div class="stack-card">
-        <div class="s-icon">🗣️</div>
+      <div class="st-card">
+        <div class="s-ico">🗣️</div>
         <h4>Azure TTS</h4>
         <p>ko-KR-SunHiNeural<br>자연스러운 한국어</p>
-        <span class="s-status s-live">LIVE</span>
+        <span class="s-dot sd-live">LIVE</span>
       </div>
-      <div class="stack-card">
-        <div class="s-icon">🟢</div>
+      <div class="st-card">
+        <div class="s-ico">🟢</div>
         <h4>Node.js</h4>
-        <p>Express 서버<br>Render 배포</p>
-        <span class="s-status s-live">LIVE</span>
+        <p>Express 서버<br>Render 클라우드</p>
+        <span class="s-dot sd-live">LIVE</span>
       </div>
-      <div class="stack-card">
-        <div class="s-icon">🗄️</div>
+      <div class="st-card">
+        <div class="s-ico">🗄️</div>
         <h4>Supabase</h4>
         <p>PostgreSQL DB<br>Seoul 서버</p>
-        <span class="s-status s-live">LIVE</span>
+        <span class="s-dot sd-live">LIVE</span>
       </div>
-      <div class="stack-card">
-        <div class="s-icon">📱</div>
+      <div class="st-card">
+        <div class="s-ico">💬</div>
         <h4>카카오 알림톡</h4>
-        <p>가족 알림 발송<br>케어 리포트</p>
-        <span class="s-status s-dev">개발중</span>
+        <p>가족 알림 · 리포트<br>결제 승인 알림</p>
+        <span class="s-dot sd-dev">개발중</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 비전 -->
+<div class="vision-bg">
+  <div class="vision-inner">
+    <div class="v-logo">📞</div>
+    <h2>기술의 온기를<br><em>모두에게</em></h2>
+    <p>스마트폰을 못 써도 괜찮습니다.<br>앱을 몰라도 괜찮습니다.<br>전화기 하나, 말 한마디.<br>그것으로 충분한 세상을 만듭니다.</p>
+    <div class="vision-info">
+      <div class="vinfo"><div class="vi-label">전화번호</div><div class="vi-val">+1 (551) 212-4160</div></div>
+      <div class="vinfo"><div class="vi-label">서버</div><div class="vi-val">ffmpeg-server-vbib.onrender.com</div></div>
+      <div class="vinfo"><div class="vi-label">DB</div><div class="vi-val">Supabase Seoul</div></div>
+      <div class="vinfo"><div class="vi-label">GitHub</div><div class="vi-val">github.com/boohpd/mallohai</div></div>
     </div>
   </div>
 </div>
 
-<!-- 푸터 -->
-<div class="footer">
-  <div style="font-size:72px; margin-bottom:20px;">📞</div>
-  <h2>말로해</h2>
-  <p style="font-size:18px; color:rgba(255,255,255,0.6); margin-top:12px;">전화 한 통으로 세상을 연결합니다</p>
-  <p style="margin-top:24px;">Made with ❤️ by K-PROP × ClipK · 2026</p>
-  <p style="margin-top:8px; font-size:12px; color:rgba(255,255,255,0.3);">
-    Vapi.ai · +1(551)212-4160 · ffmpeg-server-vbib.onrender.com · jvphsjkifzjiuujfayca.supabase.co
-  </p>
-</div>
+<footer>
+  <p><strong>말로해</strong> — 전화 한 통으로 세상을 연결합니다</p>
+  <p style="margin-top:8px">Made with ❤️ by K-PROP × ClipK · 2026</p>
+</footer>
 
 </body>
 </html>
