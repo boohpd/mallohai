@@ -19,38 +19,57 @@ app.post('/webhook', async (req, res) => {
   const body = req.body;
   const type = body?.message?.type;
 
-  console.log('📞 Vapi 웹훅:', type, JSON.stringify(body?.message?.functionCall || {}));
+  console.log('📞 Vapi 웹훅:', type, JSON.stringify(body?.message || {}).slice(0, 200));
 
-  // 함수 호출 처리
+  // tool-calls 처리 (최신 Vapi 형식)
+  if (type === 'tool-calls') {
+    const toolCallList = body.message.toolCallList || [];
+    const results = await Promise.all(toolCallList.map(async (tc) => {
+      const fnName = tc.function?.name;
+      const params = JSON.parse(tc.function?.arguments || '{}');
+      let result = '';
+      switch (fnName) {
+        case 'get_weather':
+          result = await getWeather(params.city || '서울'); break;
+        case 'get_fortune':
+          result = await getFortune(params.birth_date, params.name); break;
+        case 'send_sms':
+          result = await sendSMS(params.phone, params.message); break;
+        case 'get_news':
+          result = await getNews(); break;
+        case 'register_user':
+          result = await registerUser(params); break;
+        case 'forward_call':
+          result = `${params.name}님 번호(${params.phone})로 연결합니다. 잠시만 기다려주세요.`; break;
+        default:
+          result = '죄송합니다, 해당 기능은 준비 중입니다.';
+      }
+      return { toolCallId: tc.id, result };
+    }));
+    return res.json({ results });
+  }
+
+  // function-call 처리 (구형 Vapi 형식 호환)
   if (type === 'function-call') {
     const fnName = body.message.functionCall?.name;
     const params = body.message.functionCall?.parameters || {};
-
     let result = '';
-
     switch (fnName) {
       case 'get_weather':
-        result = await getWeather(params.city || '서울');
-        break;
+        result = await getWeather(params.city || '서울'); break;
       case 'get_fortune':
-        result = await getFortune(params.birth_date, params.name);
-        break;
+        result = await getFortune(params.birth_date, params.name); break;
       case 'send_sms':
-        result = await sendSMS(params.phone, params.message);
-        break;
+        result = await sendSMS(params.phone, params.message); break;
       case 'get_news':
-        result = await getNews();
-        break;
+        result = await getNews(); break;
       case 'register_user':
-        result = await registerUser(params);
-        break;
+        result = await registerUser(params); break;
       case 'forward_call':
-        result = `${params.name}님 번호(${params.phone})로 연결합니다. 잠시만 기다려주세요.`;
-        break;
+        result = `${params.name}님 번호(${params.phone})로 연결합니다. 잠시만 기다려주세요.`; break;
       default:
         result = '죄송합니다, 해당 기능은 준비 중입니다.';
     }
-
     return res.json({ result });
   }
 
